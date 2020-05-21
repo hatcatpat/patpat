@@ -11,6 +11,13 @@ This repo comes with a set of classes for SuperCollider integration. It also con
 
 # how
 For the SuperCollider (without GUI):
+Installing: 
+First, create folder called "Patpat" in the folder given by executing the following command in SuperCollider:
+```supercollider
+Platform.userExtensionDir;
+```
+Then, in Scide, go to *Edit, Preferences, Interpreter*. Add the folder you just created to the *Include* section. Then, restart (maybe just Recompile The Class Library with Ctrl-Shift-L), and you should be happy as Larry.
+Using:
 ```supercollider
 s.boot; // first boot the server
 
@@ -33,11 +40,20 @@ p.setParam("alfred", "freq", 880)
 ```
 
 For the Python:
-You interact with the program by editing the file *user_commands.py*. This file consists of 2 functions: *variables* and *command*. 
-The *variables* function is called every time you save the file. It contains a global dictionary *V*, for "variables". In dictionary you can store the objects **Counter, Seq, Cycle** as well as any other value. Objects stored in this dictionary will retain their value when the file is updated. You will also use this function to set the speed of the program. Another thing that you could do in this function is create new players. The *new_player* function will create a new player with a given name and synth (if only a name is given, it will automatically set the synth to be equal to the name). Make sure the synth actually exists. It work explode or anything, but it will just make SuperCollider cry :( . Really, you just want to use *variables* to run commands that you only want to be done "once".
-The *command* function is the main fella. By using a sequence of if-statements, chance, and modulo arithmetic, you can create algorithmic musical patterns. As *user_commands.py* is just good ol' Python, you can define new functions wherever you want, and you can put whatever you like in *command* (except for errors). Most errors will just freeze the program until you fix the error, there are a few errors which will straight up crash it though.
+Installing:
+*Hopefully* you will just need to install [python-osc](https://pypi.org/project/python-osc/) with Pip. This project is Python 3+ only. Place the folder *Python* wherever the bleedin' hell ya like.
+Using:
+You run the program by executing *python main.py*.
+You interact with the program by editing the file *user_commands.py*, and then sending an OSC message with address "/update_commands" to localhost:5005. I use Vim and so I use the hotkey Ctrl-e to save and update:
+```vim
+nnoremap <silent> <c-e> :w<CR>:silent exec "!sendosc localhost 5005 /update_commands"<CR>
+```
+The file *user_commands* consists of 2 functions: *variables* and *command*. 
+The *variables* function is called every time you update the file. It contains a global dictionary *V*, for "variables". In dictionary you can store the objects **Counter, Seq, Cycle** as well as any other value. Objects stored in this dictionary will retain their value when the file is updated. You will also use this function to set the speed of the program. Another thing that you could do in this function is create new players. The *new_player* function will create a new player with a given name and synth (if only a name is given, it will automatically set the synth to be equal to the name). Make sure the synth actually exists. It work explode or anything, but it will just make SuperCollider cry :( . Really, you just want to use *variables* to run commands that you only want to be done "once".
+The *command* function is the main fella. It is called every "beat". By using a sequence of if-statements, chance, and modulo arithmetic, you can create algorithmic musical patterns. As *user_commands.py* is just good ol' Python, you can define new functions wherever you want, and you can put whatever you like in *command* (except for errors). Most errors will just freeze the program until you fix the error, there are a few errors which will straight up crash it though.
 There are also a few imports n' stuff at the top of the file.
 
+Here's an example:
 ```python
 # imports n' stuff :)
 from counter import Counter
