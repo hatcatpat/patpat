@@ -67,3 +67,5 @@ CmdPeriod.doOnce({if(w.isClosed.not, {w.close})});
 // editable parameters
 ~setMargin.value(100);
 ~dur = 10;
+
+Synth("sin", [out:0,pan:0, bus:0])
