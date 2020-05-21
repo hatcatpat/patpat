@@ -15,7 +15,7 @@ var u= UserView(w, Rect(width*margin/2, height*margin/2, width*margin, height*ma
 // this will recieve patpat "trig" messages, m[1] is the name of the player being triggered
 var o= OSCFunc({
 	arg m;
-	m.postln;
+	// m.postln;
 	if (m[1] == 'saw'){
 		col = Color.black;
 	};
@@ -32,15 +32,18 @@ var t = 0;
 ~dur = 10;
 ~xpos = 0;
 ~ypos = 0;
+~running = 0;
 
 u.drawFunc = {
 
-	Pen.fillColor = col;
-	Pen.fillRect( Rect(width*margin*~xpos,height*margin*~ypos,width*margin, height*margin) );
+	if (~running == 1){
+		Pen.fillColor = col;
+		Pen.fillRect( Rect(width*margin*~xpos,height*margin*~ypos,width*margin, height*margin) );
 
-	t = t + 1;
-	if (t >= ~dur){
-		col = Color.white;
+		t = t + 1;
+		if (t >= ~dur){
+			col = Color.white;
+		};
 	};
 
 };
@@ -52,6 +55,10 @@ u.drawFunc = {
 
 u.keyDownAction = {
 	arg view,char,modifiers,unicode,keycode;
+	if (char.asString == "1"){
+		~running = ~running + 1;
+		~running = ~running%2;
+	};
 };
 
 u.clearOnRefresh= true;
@@ -63,9 +70,3 @@ w.front;
 u.animate = true;
 CmdPeriod.doOnce({if(w.isClosed.not, {w.close})});
 )
-
-// editable parameters
-~setMargin.value(100);
-~dur = 10;
-
-Synth("sin", [out:0,pan:0, bus:0])
