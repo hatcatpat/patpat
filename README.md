@@ -121,9 +121,10 @@ def command(t): # variable t reprents the current time. It's mostly not used for
 
 # extras
 
-I have also made a MIDI integrated GUI editor for the synth/effect params. To use it, simply execute the following lines in SuperCollider
+I have also made a MIDI integrated GUI editor for the synth/effect params. To use it, simply execute the following lines in SuperCollider:
 ```supercollider
 s.boot;
 p = Patpat.new(s);
 w = PatpatGui.new(p);
 ```
+![Image of the GUI](https://github.com/hatcatpat/patpat/tree/master/Examples/gui_explanation.png)
