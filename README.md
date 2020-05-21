@@ -127,4 +127,7 @@ s.boot;
 p = Patpat.new(s);
 w = PatpatGui.new(p);
 ```
+The below image shows how to use it:
 ![Image of the GUI](https://github.com/hatcatpat/patpat/tree/master/Examples/gui_explanation.png)
+
+I have no idea how MIDI devices work on Windows/Mac. For Linux, you just have to connect your midi device to a SuperCollider midi input using (for example) Qjackctl.
