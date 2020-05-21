@@ -68,11 +68,11 @@ def variables():
 
 def command(t):
 
-    if chance(0.1): // returns true if a random number from 0-1 is less than 0.1
-        p("saw") // selects the player "saw"
-        dur(0.1) // sets duration of "saw"
-        note(between(70, 100, 2)) // sets the note to be from 70 to 100, in intervals of 2
-        trig() // triggers the sound!
+    if chance(0.1): # returns true if a random number from 0-1 is less than 0.1
+        p("saw") # selects the player "saw"
+        dur(0.1) # sets duration of "saw"
+        note(between(70, 100, 2)) # sets the note to be from 70 to 100, in intervals of 2
+        trig() # triggers the sound!
     else:
         if mod(3):
             p("saw")
@@ -80,8 +80,8 @@ def command(t):
             note(50)
             trig()
 
-    if euclid(3, 8): // eu know the drill
+    if euclid(3, 8): # eu know the drill
         p("sin")
-        note(choose(60, 70, 50, 55)) // sets the note to be a randomly chosen element of [60,70,50,55]
+        note(choose(60, 70, 50, 55)) # sets the note to be a randomly chosen element of [60,70,50,55]
         trig()
 ```
