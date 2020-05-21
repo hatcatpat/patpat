@@ -11,13 +11,17 @@ This repo comes with a set of classes for SuperCollider integration. It also con
 
 # how
 For the SuperCollider (without GUI):
+
 Installing: 
+
 First, create folder called "Patpat" in the folder given by executing the following command in SuperCollider:
 ```supercollider
 Platform.userExtensionDir;
 ```
 Then, in Scide, go to *Edit, Preferences, Interpreter*. Add the folder you just created to the *Include* section. Then, restart (maybe just Recompile The Class Library with Ctrl-Shift-L), and you should be happy as Larry.
+
 Using:
+
 ```supercollider
 s.boot; // first boot the server
 
@@ -39,10 +43,16 @@ p.setParam("alfred", "freq", 880)
 // NOTE: The parameter names can be whatever you want, but it will only have an effect if the synthdef has such an argument
 ```
 
+
+
 For the Python:
+
 Installing:
+
 *Hopefully* you will just need to install [python-osc](https://pypi.org/project/python-osc/) with Pip. This project is Python 3+ only. Place the folder *Python* wherever the bleedin' hell ya like.
+
 Using:
+
 You run the program by executing *python main.py*.
 You interact with the program by editing the file *user_commands.py*, and then sending an OSC message with address "/update_commands" to localhost:5005. I use Vim and so I use the hotkey Ctrl-e to save and update:
 ```vim
