@@ -4,6 +4,7 @@ A Python based OSC sequencer for audio applications, with SuperCollider integrat
 ##### contents
 [what](#what)
 [how](#how)
+[extras](#extras)
 
 # what
 Patpat is a Python based sequencer which sends OSC messages. Due to delays in OSC messages, it sends each message ahead of time. It is then the job of the audio program to process and trigger these events in time, and then tell the Python program to increase its position. The Python is very general, so it can be used by any program capable of receiveing and sending OSC. 
@@ -116,4 +117,13 @@ def command(t): # variable t reprents the current time. It's mostly not used for
         p("sin")
         note(choose(60, 70, 50, 55)) # sets the note to be a randomly chosen element of [60,70,50,55]
         trig()
+```
+
+# extras
+
+I have also made a MIDI integrated GUI editor for the synth/effect params. To use it, simply execute the following lines in SuperCollider
+```supercollider
+s.boot;
+p = Patpat.new(s);
+w = PatpatGui.new(p);
 ```
