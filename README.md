@@ -35,13 +35,13 @@ The *command* function is the main fella. By using a sequence of if-statements, 
 There are also a few imports n' stuff at the top of the file.
 
 ```python
-// imports n' stuff :)
+# imports n' stuff :)
 from counter import Counter
 from cycle import Cycle
 from funcs import *
 from sequence import Seq
 
-// just a nice shortcut. So you can use _ to represent an empty bit in a Seq
+# just a nice shortcut. So you can use _ to represent an empty bit in a Seq
 _ = "_"
 
 
@@ -50,14 +50,14 @@ def variables():
 
     V = {"c": Counter(16), "d": Counter(9), "s": 60}
 
-    speed(bpm(120, 4)) // bpm takes BPM and BARS
+    speed(bpm(120, 4)) # bpm takes BPM and BARS
 
-    new_player("saw") // makes a new player "saw", using synth "saw"
-    toggle(1, "lpf", "delay") // toggles the effects "lpf" and "delay"
-    dur(0.5) // length of each note
-    delt(0.125) // shortcut for effect("delay", "delaytime", 0.125)
-    lpf(5000) // shortcut for effect("lpf", "lpf", 5000)
-    cut(0) // cut = 0 means that new synths will be added, rather than replacing the current (i.e, multiple notes at once)
+    new_player("saw") # makes a new player "saw", using synth "saw"
+    toggle(1, "lpf", "delay") # toggles the effects "lpf" and "delay"
+    dur(0.5) # length of each note
+    delt(0.125) # shortcut for effect("delay", "delaytime", 0.125)
+    lpf(5000) # shortcut for effect("lpf", "lpf", 5000)
+    cut(0) # cut = 0 means that new synths will be added, rather than replacing the current (i.e, multiple notes at once)
 
     new_player("sin")
     dur(0.125)
