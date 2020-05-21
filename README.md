@@ -96,7 +96,7 @@ def variables():
     cut(0)
 
 
-def command(t):
+def command(t): # variable t reprents the current time. It's mostly not used for anything, because all of the functions directly reference the main time variable
 
     if chance(0.1): # returns true if a random number from 0-1 is less than 0.1
         p("saw") # selects the player "saw"
@@ -104,7 +104,7 @@ def command(t):
         note(between(70, 100, 2)) # sets the note to be from 70 to 100, in intervals of 2
         trig() # triggers the sound!
     else:
-        if mod(3):
+        if mod(3): # returns true if t%3 == 0. i.e, once every 3 beats.
             p("saw")
             dur(0.25)
             note(50)
