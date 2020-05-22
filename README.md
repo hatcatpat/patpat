@@ -135,3 +135,37 @@ The below image shows how to use it:
 ![Image of the GUI](https://github.com/hatcatpat/patpat/tree/master/Examples/gui_explanation.png)
 
 I have no idea how MIDI devices work on Windows/Mac. For Linux, you just have to connect your midi device to a SuperCollider midi input using (for example) Qjackctl.
+
+## supercollider: post processing shenanagans
+
+Because SuperCollider is a nice lady, you can apply your own effects/processing on top of the Patpat synths/effects. Below is an example of applying a granular synthesis filter + delay to a Patpat session.
+```supercollider
+s.boot;
+p = Patpat.new(s);
+StageLimiter.activate
+
+(
+SynthDef("messy", {
+	arg freq=8, width=0.5, delay = 0.125, decay = 1;
+	var input = In.ar(0,2);
+
+	input = input + CombC.ar(input, 0, 0.25, 4);
+	input = input * Pulse.ar(freq, width);
+	input = input + CombC.ar(input, 0.2, delay, decay);
+
+	ReplaceOut.ar(0, input); // use ReplaceOut to remove all the sounds before this node, use Out to simply add to it
+}).add;
+
+x.free;
+x = Synth.after(p.getGroup, "messy"); // have to insert our synth after all the patpat guys
+)
+
+// execute this to randomise all the values!
+(
+x.set("freq", rrand(1,500));
+x.set("width", rrand(0.1,0.9));
+x.set("delay", rrand(0.0,0.1));
+x.set("decay", rrand(0,1));
+)
+```
+
