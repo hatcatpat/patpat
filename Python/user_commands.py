@@ -15,4 +15,4 @@ def variables():
 
 
 def command(t):
-    print("beat")
+    print("bang")
