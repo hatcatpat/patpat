@@ -30,6 +30,7 @@ p = Patpat.new(s); // initialise the Patpat class with the given server
 
 StageLimiter.activate; // if you have the BatLib quark installed (highly recommended), then you can use this limiter to keep everything at a nice volume
 
+// Manual stuff (the below code is automatically ran when you use the Python script)
 // SETTING PARAMETERS
 p.addPlayer("alfred") // you can manually add a player to p, however this is optional as trying to set a parameter of a non-existant player will automatically add one. Moreover, the Python code should specify the players as well (see below).
 
