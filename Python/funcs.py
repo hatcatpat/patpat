@@ -24,6 +24,10 @@ def pos(name, p):  # returns the current counter of an object
     global_variables.variables[name].pos(p)
 
 
+def reset(name):
+    global_variables.variables[name].reset()
+
+
 # PATTERN UTILS##################
 
 

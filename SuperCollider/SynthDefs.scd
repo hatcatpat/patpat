@@ -2,12 +2,12 @@
 //============================
 
 SynthDef("sin", {
-	arg bus=0, note=60, atk=0,rel=0,dur=0.5, vol=1,pan=0;
+	arg bus=0, note=60, atk=0.0,rel=0.0,dur=0.5, vol=1,pan=0;
 	var sig,env,freq;
 
 	freq = note.midicps;
 	sig = SinOsc.ar(freq);
-	env = EnvGen.ar(Env.linen(atk,dur,rel), doneAction:2);
+	env = EnvGen.ar(Env.linen(atk,dur,rel), doneAction:Done.freeSelf);
 
 	Out.ar(bus, Pan2.ar(sig,pan,env*vol) );
 }).add;
@@ -18,13 +18,13 @@ SynthDef("saw", {
 
 	freq = note.midicps;
 	sig = Saw.ar(freq);
-	env = EnvGen.ar(Env.linen(atk,dur,rel), doneAction:2);
+	env = EnvGen.ar(Env.linen(atk,dur,rel), doneAction:Done.freeSelf);
 
 	Out.ar(bus, Pan2.ar(sig,pan,env*vol) );
 }).add;
 
 SynthDef(\samp,
-	{arg buf,bus = 0, rate = 1, vol=0.5, pan = 0, pos = 0, dur=0.5;
+	{arg buf,bus = 0, rate = 1, vol=0.5, pan = 0, pos = 0, dur=0.5, loop=0;
 		var sig,env;
 
 		sig = Mix.ar(PlayBuf.ar(
@@ -33,10 +33,11 @@ SynthDef(\samp,
 			BufRateScale.ir(buf) * rate,
 			1,
 			BufDur.kr(buf)*pos*44100,
-			doneAction:2)
+			loop
+			)
 		);
 
-		env = EnvGen.ar(Env.linen(0.0,dur,0),doneAction:2);
+		env = EnvGen.ar(Env.linen(0.0,dur,0),doneAction:Done.freeSelf);
 		Out.ar(bus,Pan2.ar(sig,pan,env*vol));
 }).add;
 

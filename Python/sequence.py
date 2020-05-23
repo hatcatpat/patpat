@@ -32,3 +32,6 @@ class Seq():
 
     def get(self):
         return self.arr[self.counter][0], self.arr[self.counter][1]
+
+    def reset(self):
+        self.counter = 0
