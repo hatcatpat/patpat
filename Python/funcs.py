@@ -184,8 +184,16 @@ def samp(s):  # WIP
     param("sample", s)
 
 
-def note(n):  # WIP
+def midi_note(n):
     param("note", n)
+
+
+def note(n):
+    param("note", global_variables.note_to_number(n))
+
+
+def scale(s, i=0, octave=4):
+    param("note", global_variables.scale_to_number(s, i, octave))
 
 
 def freq(f):

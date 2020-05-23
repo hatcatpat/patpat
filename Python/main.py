@@ -1,5 +1,6 @@
 import sys
 import time
+
 import global_variables
 
 
@@ -13,7 +14,7 @@ def main():
             time.sleep(1000)
     except (KeyboardInterrupt, SystemExit):
         print("leaving")
-        global_variables.quit = True
+        global_variables.quit_flag = True
 
 
 if __name__ == "__main__":

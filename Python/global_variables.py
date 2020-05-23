@@ -6,24 +6,69 @@ from osc_manager import OSCManager
 
 
 def init():
-    global first_command, osc, t, mod, quit, printStrings, speed, current_player, update_flag, counters, cycles, euclids, variables
+    global first_command, osc, t, mod, quit_flag, speed, current_player, update_flag, euclids, notes, variables
     first_command = True
     osc = OSCManager()
     t = 0
     speed = 0.125
     mod = 16
-    quit = False
+    quit_flag = False
     update_flag = True
     current_player = ""
-    counters = {}
-    cycles = {}
-    generate_euclids()
-
     variables = {}
+    notes = {
+        "c": 0,
+        "C": 1,
+        "d": 2,
+        "D": 3,
+        "e": 4,
+        "f": 5,
+        "F": 6,
+        "g": 7,
+        "G": 8,
+        "a": 9,
+        "A": 10,
+        "b": 11
+    }
+
+    generate_scales()
+    generate_euclids()
 
     osc.reset_bundle()
     update_commands()
     init_bang()
+
+
+def note_to_number(note_string):
+    note = note_string[0]
+
+    if len(note_string) > 1:
+        octave = int(note_string[1:]) + 1
+    else:
+        octave = 2
+
+    if note in notes:
+        return notes[note] + octave * 12
+    else:
+        return 0
+
+
+def scale_to_number(scale, element=0, octave=2):
+
+    if scale in scales:
+        return scales[scale][element % len(scales[scale])] + (octave + 1) * 12
+    else:
+        return 0
+
+
+def generate_scales():
+    global scales
+
+    scales = {
+        "major": [0, 2, 4, 5, 7, 9, 11],
+        "minor": [0, 2, 3, 5, 7, 8, 10],
+        "chromatic": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
+    }
 
 
 def generate_euclids():
@@ -128,8 +173,6 @@ def update_commands():
 
     user_commands.variables()
 
-    # TODO: Try and make this more efficient
-
     for v in user_commands.V:
         if v in variables:
             if v != variables[v]:
@@ -138,21 +181,3 @@ def update_commands():
                 user_commands.V[v] = variables[v]
         else:
             variables[v] = user_commands.V[v]
-
-    # for c in user_commands.C:
-    #     if c in counters:
-    #         if user_commands.C[c].mod != counters[c].mod:
-    #             counters[c] = user_commands.C[c]
-    #         else:
-    #             user_commands.C[c] = counters[c]
-    #     else:
-    #         counters[c] = user_commands.C[c]
-
-    # for y in user_commands.Y:
-    #     if y in cycles:
-    #         if user_commands.Y[y].arr != cycles[y].arr:
-    #             cycles[y] = user_commands.Y[y]
-    #         else:
-    #             user_commands.Y[y] = cycles[y]
-    #     else:
-    #         cycles[y] = user_commands.Y[y]
