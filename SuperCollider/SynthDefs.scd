@@ -2,23 +2,23 @@
 //============================
 
 SynthDef("sin", {
-	arg bus=0, note=60, dur=0.5, vol=1,pan=0;
+	arg bus=0, note=60, atk=0,rel=0,dur=0.5, vol=1,pan=0;
 	var sig,env,freq;
 
 	freq = note.midicps;
 	sig = SinOsc.ar(freq);
-	env = EnvGen.ar(Env.perc(0,dur), doneAction:2);
+	env = EnvGen.ar(Env.linen(atk,dur,rel), doneAction:2);
 
 	Out.ar(bus, Pan2.ar(sig,pan,env*vol) );
 }).add;
 
 SynthDef("saw", {
-	arg bus=0, note=60, dur=0.5, vol=1,pan=0;
+	arg bus=0, note=60, atk=0,rel=0,dur=0.5, vol=1,pan=0;
 	var sig,env,freq;
 
 	freq = note.midicps;
 	sig = Saw.ar(freq);
-	env = EnvGen.ar(Env.perc(0,dur), doneAction:2);
+	env = EnvGen.ar(Env.linen(atk,dur,rel), doneAction:2);
 
 	Out.ar(bus, Pan2.ar(sig,pan,env*vol) );
 }).add;
