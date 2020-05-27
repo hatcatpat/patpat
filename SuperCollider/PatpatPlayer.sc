@@ -50,12 +50,12 @@ PatpatPlayer {
 			synth_args = synth_args++[key,value];
 		};
 
-		fold = dict["fold"];
+		fold = dict["fold"].asString;
 		samp = dict["samp"];
 		if (fold != nil && samp != nil){
 			if (samples[fold] != nil){
 				if (samples[fold][samp] != nil){
-					synth_args = synth_args++["buf", samples[fold.asString][samp] ];
+					synth_args = synth_args++["buf", samples[fold][samp] ];
 				};
 			};
 		};
