@@ -4,60 +4,99 @@ from funcs import *
 from sequence import Seq
 
 _ = "_"
+a = "a"
+A = "A"
+b = "b"
+B = "B"
+c = "c"
+C = "C"
+d = "d"
+D = "D"
+e = "e"
+E = "E"
+f = "f"
+F = "F"
+g = "g"
+G = "G"
 
 
 def variables():
-    global V
+    global V, x, y
+    x = 0
+    y = 4
+    z = [0, 3, 4, 5, 7]
+    V = {
+        "a": Seq(a, a, c, e, e),
+        "m": Seq(4, 2),
+        "m2": Seq("a6", "g6"),
+        "s": Seq("b6", "e6", "c6", "f6"),
+        "euc": Seq(11, 13, 11, 15)
+    }
+    speed(bpm(120, 4))
 
-    V = {}
-
-    speed(bpm(107, 8))
-
-    new_player("samp")
-    param("fold", "vio")
-    toggle(1, "lpf", "decimate")
-    effect("lpf", "lpf", 5000)
-    param("samp", 0)
-    dur(2)
-    cut(1)
+    new_player("sin")
+    toggle(1, "delay")
+    toggle(1, "reverb")
+    room(0.5)
+    delt(0.125)
+    dur(0.0)
+    rel(0.5)
+    cut(0)
 
     new_player("saw")
-    toggle(1, "lpf")
-    lpf(5000)
-    dur(1)
-    vol(50)
-    cut(1)
+    toggle(1, "lpf", "reverb")
+    room(0.5)
+    lpf(2000)
+    cut(0)
+    rel(0.5)
 
 
 def command(t):
-    if chance(0.5):
-        a(t)
+    global V
 
+    f1(t)
+
+
+def f2(t):
+    if mod(2, 3) and not mod(5):
+        p("sin")
         if chance(0.5):
-            a(t)
-    else:
-        trig("samp")
+            note(val("a") + "4")
+            rel(0.25)
+        else:
+            rel(0.1)
+            note(val("a") + "5")
+        if chance(0.1):
+            pos("a", between(0, sz("a"), 1))
+        pan(between(-1, 1))
+        trig()
+    if mod(val("m", 0)):
+        p("sin")
+        note(val("m2", 0))
+        pan(0)
+        rel(0.1)
+        trig()
 
-    if mod(8) or (chance(0.5) and mod(2)):
+    if mod(16):
+        inc("m")
+        if chance(0.5):
+            inc("m2")
+
+    if mod(16):
         p("saw")
-        lpf(between(100, 8000, 100))
-        scale("chromatic", choose(0, 2), 2)
+        note(val("s", 1))
+        pan(0.5)
         trig()
 
 
-def a(t):
+def f1(t):
 
-    if euclid(3, 8):
-        trig("samp")
-        param("rate", choose(1, 2))
-        start(between(0, 15, 1) / 16)
-
-    if chance(0.5):
-        x = choose("vio", "107")
-
-        if x == "vio":
-            pan(0)
-        else:
-            pan(between(-1, 1))
-        param("fold", x)
-        effect("decimate", "rate", between(1000, 10000, 100))
+    if euclid(val("euc", 0), 16):
+        p("sin")
+        rel(0.1)
+        cut(1)
+        toggle(0, "delay", "reverb")
+        note(choose(g, a, c, e) + str(choose(3, 4, 5, 6, 7)))
+        trig()
+    if every(val("euc", 0)):
+        inc("euc")

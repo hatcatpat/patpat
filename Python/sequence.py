@@ -11,6 +11,9 @@ class Seq():
         self.arr = arr
         self.counter = 0
 
+    def sz(self):
+        return len(self.arr)
+
     def inc(self, step=1):
         self.counter += step
         self.counter %= len(self.arr)

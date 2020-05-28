@@ -16,8 +16,12 @@ def bang(name, step=1):  # returns true if the object wants to be triggered
     return global_variables.variables[name].bang(step)
 
 
-def val(name, step=0):  # returns the value of an object
+def val(name, step=1):  # returns the value of an object
     return global_variables.variables[name].val(step)
+
+
+def sz(name):
+    return global_variables.variables[name].sz()
 
 
 def pos(name, p):  # returns the current counter of an object
@@ -184,8 +188,9 @@ def synth(s):
     param("synth", s)
 
 
-def samp(s):  # WIP
-    param("sample", s)
+def samp(f, s):
+    param("fold", f)
+    param("samp", s)
 
 
 def midi_note(n):
@@ -228,22 +233,6 @@ def vol(v):
     param("vol", v / 100)
 
 
-def lpf(l):
-    effect("lpf", "lpf", l)
-
-
-def res(r):
-    effect("lpf", "res", r)
-
-
-def delt(t):
-    effect("delay", "delaytime", t)
-
-
-def delT(t):
-    effect("delay", "maxDelaytime", t)
-
-
 def pan(p):
     param("pan", p)
 
@@ -254,3 +243,51 @@ def start(s):
 
 def cut(t):
     param("cut", t)
+
+
+# lpf
+
+
+def lpf(l):
+    effect("lpf", "lpf", l)
+
+
+def res(r):
+    effect("lpf", "res", r)
+
+
+# delay
+
+
+def delt(t):
+    effect("delay", "delaytime", t)
+
+
+def delT(t):
+    effect("delay", "maxDelaytime", t)
+
+
+# reverb
+
+
+def verb_mix(v):
+    effect("reverb", "mix", v)
+
+
+def room(v):
+    effect("reverb", "room", v)
+
+
+def damp(v):
+    effect("reverb", "damp", v)
+
+
+# decimate
+
+
+def deci(v):
+    effect("decimate", "rate", v)
+
+
+def bits(v):
+    effect("decimate", "bits", v)
