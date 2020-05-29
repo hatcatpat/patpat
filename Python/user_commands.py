@@ -11,7 +11,7 @@ def variables():
     speed(bpm(120, 4))
     V = {"a":
             Seq(
-                C("a4", C("b4",_), "e3", R("f5",_)).step(1),
+                C( "a4", C("b4",_), "e3", R("f5",_) ),
                 R("c5")
             )
         }
