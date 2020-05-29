@@ -3,7 +3,18 @@ from random import *
 
 import global_variables
 from counter import Counter
-from cycle import Cycle
+from sequence import SeqElement
+
+# SEQ UTILS ######################
+
+
+def R(*vals):
+    return SeqElement("rand", vals)
+
+
+def C(*vals):
+    return SeqElement("cycle", vals)
+
 
 # OBJECT UTILS ###################
 
@@ -11,6 +22,8 @@ from cycle import Cycle
 def inc(name, step=1):  # increases the counter of an object stored in V
     global_variables.variables[name].inc(step)
 
+def edit(name, x):
+    global_variables.variables[name] = x
 
 def bang(name, step=1):  # returns true if the object wants to be triggered
     return global_variables.variables[name].bang(step)
@@ -32,7 +45,7 @@ def reset(name):
     global_variables.variables[name].reset()
 
 
-# PATTERN UTILS##################
+# PATTERN UTILS ##################
 
 
 def nearest(x, n):  # rounds x to nearest multiple of n

@@ -163,7 +163,7 @@ def trigger_update_flag(*args):
 
 def update_commands():
     print("read commands")
-    global user_commands, first_command, cycles, counters, variables
+    global user_commands, first_command, cycles, counters
 
     if first_command:
         import user_commands
@@ -172,7 +172,10 @@ def update_commands():
         reload(user_commands)
 
     user_commands.variables()
+    update_variables()
 
+def update_variables():
+    global variables
     for v in user_commands.V:
         if v in variables:
             if v != variables[v]:
